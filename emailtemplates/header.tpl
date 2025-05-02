@@ -3,7 +3,7 @@
       <tbody>
         <tr style="height: 21px;">
           <td style="padding: 48px 24px 0px; color: #161c2d; font-size: 18px; font-weight: 600; height: 21px; width: 425.02px;">
-            <img style="color: #8492a6; font-size: 14px; font-weight: 400; text-align: center; display: block; margin-left: auto; margin-right: auto;" src="https://syscoglobalfinance.com/assets/images/logo/email-logo.png" alt=""> 
+            <img style="color: #8492a6; font-size: 14px; font-weight: 400; text-align: center; display: block; margin-left: auto; margin-right: auto;" src="https://asutorguard.org/assets/images/logo/email-logo.png" alt=""> 
             <br>
             <br>Hello, #name#
           </td>

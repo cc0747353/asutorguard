@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-        <title>Asutor Guard - HYIP Investment HTML Template</title>
+        <title>Asutor Guard - Secure Investment Platform</title>
     
         <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="./assets/css/all.min.css">
@@ -21,7 +21,7 @@
     
         <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
         {literal}
-            <!-- Smartsupp Live Chat script -->
+            <!-- Smartsupp Live Chat script 
             <script type="text/javascript">
                 var _smartsupp = _smartsupp || {};
                 _smartsupp.key = '3fcf20eb8c1dbbc4a5655a2c28e412d2f5a7109c';
@@ -37,7 +37,7 @@
                     s.parentNode.insertBefore(c, s);
                 })(document);
             </script>
-
+            -->
         {/literal}
 
      
@@ -108,7 +108,7 @@
                                             <a href="{"?a=suport"|encurl}"><i class="flaticon-support"></i>Support</a>
                                         </li>
                                         <li>
-                                            <a href="Mailto:support@syscoglobalfinance.com"><i class="flaticon-email"></i><span class="__cf_email__" data-cfemail="620b0c040d220a1b0b120e030c064c010d0f">support@syscoglobalfinance.com</span> </a>
+                                            <a href="Mailto:support@asutorguard.org"><i class="flaticon-email"></i><span class="__cf_email__" data-cfemail="620b0c040d220a1b0b120e030c064c010d0f">support@asutorguard.org</span> </a>
                                         </li>
                                   
                                     </ul>
@@ -166,7 +166,7 @@
                         </div>
                     </div>
                     <div class="container-fluid">
-                       
 
 
-                        
+
+

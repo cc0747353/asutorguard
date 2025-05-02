@@ -14,7 +14,7 @@
                       <div class="copy-button">
                           <a href="#0" class="custom-button" id="copy">Copy Link</a>
                       </div>
-                      <input type="text" id="copyLinks" readonly value="https://syscoglobalfinance.com/?ref={$userinfo.username}">
+                      <input type="text" id="copyLinks" readonly value="https://asutorguard.org/?ref={$userinfo.username}">
                   </div>
               </div>
           </div>

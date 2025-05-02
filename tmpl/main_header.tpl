@@ -12,7 +12,7 @@
                 content="ie=edge"
             >
     
-            <title>Asutor Guard</title>
+            <title>Asutor Guard - Secure Investment Platform</title>
     
             <link
                 rel="stylesheet"
@@ -124,10 +124,10 @@
                                             <a href="#0"><i class="flaticon-support"></i>Support</a>
                                         </li>
                                         <li>
-                                            <a href="Mailto:support@syscoglobalfinance.com"><i class="flaticon-email"></i><span
+                                            <a href="Mailto:support@asutorguard.org"><i class="flaticon-email"></i><span
                                                     class="__cf_email__"
                                                     data-cfemail="86efe8e0e9c6eeffeff6eae7e8e2a8e5e9eb"
-                                                >support@syscoglobalfinance.com</span> </a>
+                                                >support@asutorguard.org</span> </a>
                                         </li>
                                         
                                     </ul>

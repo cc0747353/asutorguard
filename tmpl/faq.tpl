@@ -83,12 +83,12 @@
                     <div class="faq-wrapper">
                         <div class="faq-item">
                             <div class="faq-title">
-                                <h5 class="title">How can I invest with syscoglobalfinance.com?</h5>
+                                <h5 class="title">How can I invest with asutorguard.org?</h5>
                                 <span class="right-icon"></span>
                             </div>
                             <div class="faq-content">
                                 <p>
-                                    To make a investment you must first become a member of syscoglobalfinance.com. Once
+                                    To make a investment you must first become a member of asutorguard.org. Once
                                     you are signed up, you can make your first deposit. All deposits must be made
                                     through the Members Area. You can login using the member username and password you
                                     receive when signup.
@@ -98,7 +98,7 @@
 
                         <div class="faq-item">
                             <div class="faq-title">
-                                <h5 class="title">How do I open my syscoglobalfinance.com Account?</h5>
+                                <h5 class="title">How do I open my asutorguard.org Account?</h5>
                                 <span class="right-icon"></span>
                             </div>
                             <div class="faq-content">
@@ -111,7 +111,7 @@
 
                         <div class="faq-item">
                             <div class="faq-title">
-                                <h5 class="title">I wish to invest with syscoglobalfinance.com but I don't have an any
+                                <h5 class="title">I wish to invest with asutorguard.org but I don't have an any
                                     wallet account. What should I do?</h5>
                                 <span class="right-icon"></span>
                             </div>
@@ -156,7 +156,7 @@
                             </div>
                             <div class="faq-content">
                                 <p>
-                                    Log into your syscoglobalfinance.com account and click on the "Edit Account". You
+                                    Log into your asutorguard.org account and click on the "Edit Account". You
                                     can change your e-mail address and password there.
                                 </p>
                             </div>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="faq-content">
                                 <p>
-                                    No, profits are gathered on your syscoglobalfinance.com account and you can withdraw
+                                    No, profits are gathered on your asutorguard.org account and you can withdraw
                                     them anytime.
                                 </p>
                             </div>
@@ -245,7 +245,7 @@
                             </div>
                             <div class="faq-content">
                                 <p>
-                                    Depending on each plan. Interest on your syscoglobalfinance.com account is acquired
+                                    Depending on each plan. Interest on your asutorguard.org account is acquired
                                     Daily, Weekly and credited to your available balance at the end of each day.
                                 </p>
                             </div>
@@ -253,7 +253,7 @@
 
                         <div class="faq-item">
                             <div class="faq-title">
-                                <h5 class="title">Can I make an additional deposit to syscoglobalfinance.com account
+                                <h5 class="title">Can I make an additional deposit to asutorguard.org account
                                     once it has been opened?</h5>
                                 <span class="right-icon"></span>
                             </div>

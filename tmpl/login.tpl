@@ -28,7 +28,7 @@ function checkform() {
 
 <div class="account-wrapper">
   <div class="account-body">
-      <h4 class="title mb-20">Welcome To Syscoglobalfinance.com</h4>
+      <h4 class="title mb-20">Welcome To asutorguard.org</h4>
         <form method=post name=mainform onsubmit="return checkform()" class="account-form">
         <input type=hidden name=a value='do_login'>
         <input type=hidden name=follow value='{$frm.follow}'>
