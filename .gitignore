@@ -1,0 +1,36 @@
+# General system files
+.DS_Store
+Thumbs.db
+*.log
+
+# Composer dependencies
+/vendor/
+
+# Smarty compiled templates and cache
+/templates_c/
+/cache/
+/configs/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.local
+
+# Backup files
+*.bak
+*.swp
+*.tmp
+
+# Node modules (if applicable)
+node_modules/
+
+# Other sensitive or temporary files
+*.lock
+*.sql
+*.sqlite
+*.tar.gz
+*.zip
+install.php
