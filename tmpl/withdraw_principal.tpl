@@ -22,7 +22,7 @@
 <table cellspacing=0 cellpadding=2 border=0>
 <tr>
  <th>Deposit Amount</th>
- <td>{$deposit.deposit|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.deposit}</td>
 </tr>
 <tr>
  <th>Deposit Plan</th>
@@ -30,15 +30,15 @@
 </tr>
 <tr>
  <th>Release Amount</th>
- <td>{$amount|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$amount}</td>
 </tr>
 <tr>
  <th>Fee</th>
- <td>{$fee|fiat:$deposit.ec} ({$type.withdraw_principal_percent}%)</td>
+ <td>{$currency_sign}{$fee} ({$type.withdraw_principal_percent}%)</td>
 </tr>
 <tr>
  <th>Receive Amount</th>
- <td><b>{$to_balance|fiat:$deposit.ec}</b></td>
+ <td><b>{$currency_sign}{$to_balance}</b></td>
 </tr>
 <tr>
  <td><br><input type=submit value="Confirm" class=sbmt></td>
@@ -87,11 +87,11 @@ function withdraw() {
 <table cellspacing=0 cellpadding=2 border=0>
 <tr>
  <th>Deposit Amount</th>
- <td>{$deposit.deposit|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.deposit}</td>
 </tr>
 <tr>
  <th>Deposit Earned</th>
- <td>{$deposit.earned|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.earned}</td>
 </tr>
 <tr>
  <th>Deposit Plan</th>
@@ -104,17 +104,17 @@ function withdraw() {
 {if $type.withdraw_principal_full}
 <tr>
  <th>Release Amount:</td>
- <td>{$deposit.deposit|fiat:$deposit.ec}</td>
+ <td>{$deposit.deposit}</td>
 </tr>
 {else}
 <tr>
  <th>Release Amount:</td>
- <td>{fiat ec=$deposit.ec} <input type=text name=amount value="{$deposit.deposit}" class=inpts size=15 onchange="withdraw()" onkeyup="withdraw()"
+ <td>{$currency_sign} <input type=text name=amount value="{$deposit.deposit}" class=inpts size=15 onchange="withdraw()" onkeyup="withdraw()"
       onfocusout="withdraw()" onactivate="withdraw()" ondeactivate="withdraw()"></td>
 </tr>
 <tr>
  <th>Receive Amount:</th>
- <td>{fiat ec=$deposit.ec} <input type=text name=quote readonly class=inpts size=15></td>
+ <td>{$currency_sign} <input type=text name=quote readonly class=inpts size=15></td>
 </tr>
 {/if}
 <tr>

@@ -12,7 +12,7 @@ function go(p)
 
 <form method=post name=opts>
 <input type=hidden name=a value=paidout>
-<input type=hidden name=page value="{$paginator.cur}">
+<input type=hidden name=page value={$current_page}>
 <table cellspacing=0 cellpadding=0 border=0 width=100%>
 <tr>
  <td>
@@ -43,18 +43,19 @@ function go(p)
  <td class=inheader width=200>Date</td>
  <td class=inheader width=170>Amount</td>
 </tr>
-{foreach from=$stats item=s}
+{if $stats}
+{section name=s loop=$stats}
 <tr>
- <td><b>{$s.username|escape:html}</b></td>
- <td><b>{$s.dd}</b></td>
- <td align=right><b>{$s.actual_amount|fiat:$s.ec}</b></td>
+ <td><b>{$stats[s].username}</b></td>
+ <td><b>{$stats[s].dd}</b></td>
+ <td align=right><b>{$currency_sign}{$stats[s].actual_amount}</b></td>
 </tr>
-{foreachelse}
+{/section}
+{else}
 <tr>
  <td colspan=3 align=center>No transactions found</td>
 </tr>
-{/foreach}
-
+{/if}
 {if $stats}
 <tr>
  <td colspan=2><b>TOTAL</b></td>
@@ -63,9 +64,6 @@ function go(p)
 {/if}
 </table>
 
-{paginator col=$paginator.col cur=$paginator.cur url="javascript:go('%s')"}
-
-{*
 {if $colpages > 1}
 <center>
 {if $prev_page > 0}
@@ -83,6 +81,5 @@ function go(p)
 {/if}
 </center>
 {/if}
-*}
 
 {include file="footer.tpl"}

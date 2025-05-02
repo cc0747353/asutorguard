@@ -33,6 +33,22 @@
 {/if}
 </table>
 
-{paginator col=$paginator.col cur=$paginator.cur url="?a=members_stats&page=%s"}
+{if $colpages > 1}
+<center>
+{if $prev_page > 0}
+ <a href="{"?a=members_stats&page=`$prev_page`"|encurl}">&lt;&lt;</a>
+{/if}
+{section name=p loop=$pages}
+{if $pages[p].current == 1}
+{$pages[p].page}
+{else}
+ <a href="{"?a=members_stats&page=`$pages[p].page`"|encurl}">{$pages[p].page}</a>
+{/if}
+{/section}
+{if $next_page > 0}
+ <a href="{"?a=members_stats&page=`$next_page`"|encurl}">&gt;&gt;</a>
+{/if}
+</center>
+{/if}
 
 {include file="footer.tpl"}

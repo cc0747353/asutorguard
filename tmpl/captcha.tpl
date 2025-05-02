@@ -35,22 +35,4 @@
 </tr>
 {/if}
 
-{if $ti.type == 'solvemedia'}
-<tr>
- <td class=menutxt colspan=2>
-<!--script type="text/javascript" src="http://api.solvemedia.com/papi/challenge.script?k={$settings.solvemedia_recaptcha_c_key}"></script-->
-
-        <script type="text/javascript">
-        var ACPuzzleOptions = {
-            lang:	    'en',
-            size:	    '300x150'
-        };
-        </script>
-        <ins class="acprecheck" id="acprecheck"></ins>
-        <script type="text/javascript"src="http://api.solvemedia.com/papi/challenge.precheck?k={$settings.solvemedia_recaptcha_c_key}"></script>
-  </td>
-</tr>
-{/if}
-
-
 {/if}

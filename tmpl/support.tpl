@@ -1,91 +1,86 @@
-{include file="header.tpl"}
+{include file="main_header.tpl"}
+
+ <!--=======Banner-Section Starts Here=======-->
+  <section class="bg_img hero-section-2 left-bottom-lg-max" data-background="./assets/images/about/hero-bg5.png">
+  <div class="container">
+      <div class="hero-content text-white">
+          <h1 class="title">Contact</h1>
+          <ul class="breadcrumb">
+              <li>
+                  <a href="index.html">Home</a>
+              </li>
+              <li>
+                  Contact
+              </li>
+          </ul>
+      </div>
+  </div>
+</section>
+<!--=======Banner-Section Ends Here=======-->
 
 
-<h3>Support Form:</h3><br>
+<!--=======Contact-Section Starts Here=======-->
+<section class="contact-section padding-bottom padding-top">
+  <div class="container">
+      <div class="contact-wrapper padding-top">
+          <div class="row justify-content-center">
+              <div class="col-lg-5 col-xl-4 offset-xl-1">
+                  <div class="contact-header">
+                      <h2 class="title">Get in touch</h2>
+                      <p>Ready to make life easier?</p>
+                  </div>
+                  <div class="contact-content">
+                      <h3 class="title">Have questions?</h3>
+                      <p>
+                          Have questions about payments or price plans? We have answers!
+                      </p>
+                      <a href="/?a=faq">Read F.A.Q <i class="flaticon-right-arrow"></i></a>
+                  </div>
+              </div>
+              <div class="col-lg-5 offset-xl-1">
+                  <form class="contact-form" id="contact_form_submit">
+                      <div class="form-group">
+                          <label for="name">First name</label>
+                          <input type="text" id="name" placeholder="name" name="name">
+                      </div>
+                      <div class="form-group">
+                          <label for="surename">Last name</label>
+                          <input type="text" id="surename" placeholder="surename" name="name">
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Email address</label>
+                          <input type="text" id="email" placeholder="Enter your email" name="email">
+                      </div>
+                      <div class="form-group">
+                          <label for="message">How can we help</label>
+                          <textarea name="message" id="message" placeholder="Enter Message"></textarea>
+                      </div>
+                      <div class="form-group">
+                          <input type="submit" value="Send Message">
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!--=======Contact-Section Ends Here=======-->
 
-{if $say eq 'send'}
-Message has been successfully sent. We will back to you in next 24 hours. Thank you.<br><br>
-{else}
+    
+<div class="newslater-section padding-bottom">
+    <div class="container">
+        <div class="newslater-area">
+            <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2501.6748907394913!2d0.8629952124820549!3d51.16978283519302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47deda7349eeec0d%3A0x68a36864dbf20206!2sBrakes%20Ashford%2C%20a%20Sysco%20company!5e0!3m2!1sen!2ses!4v1698245800947!5m2!1sen!2ses"
+            width="1200"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        </div>
+    </div>
+</div>
 
-<script language=javascript>
-{if $userinfo.logged == 1}
-{literal}
-function checkform() { 
-  if (document.mainform.message.value == '') {
-    alert("Please type your message!");
-    document.mainform.message.focus();
-    return false;
-  }
-  return true;
-}
-{/literal}
-{else}
-{literal}
-function checkform() {
-  if (document.mainform.name.value == '') {
-    alert("Please type your full name!");
-    document.mainform.name.focus();
-    return false;
-  }
-  if (document.mainform.email.value == '') {
-    alert("Please enter your e-mail address!");
-    document.mainform.email.focus();
-    return false;
-  }
-  if (document.mainform.message.value == '') {
-    alert("Please type your message!");
-    document.mainform.message.focus();
-    return false;
-  }
-  return true;
-}
-{/literal}
-{/if}
-</script>
-
-<form method=post name=mainform onsubmit="return checkform()">
-<input type=hidden name=a value=support>
-<input type=hidden name=action value=send>
-
- {if $errors}
-  <ul style="color:red">
-   {if $errors.turing_image == 1}
-    <li>Invalid turing image</li>
-   {/if}
-   {if $errors.invalid_email == 1}
-    <li>Invalid email address</li>
-   {/if}
-  </ul>
- {/if}
-
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <td>Your Name:</td>
-{if $userinfo.logged}
- <td><b>{$userinfo.name}</b></td>
-{else}
- <td><input type="text" name="name" value="{$frm.name|escape:htmlall}" size=30 class=inpts></td>
-{/if}
-</tr>
-<tr>
- <td>Your Email:</td>
-{if $userinfo.logged}
- <td><b>{$userinfo.email}</b></td>
-{else}
- <td><input type="text" name="email" value="{$frm.email|escape:htmlall}" size=30 class=inpts></td>
-{/if}
-</tr>
-<tr>
- <td colspan=2>Message:<br><br><textarea name=message class=inpts cols=45 rows=4>{$frm.message|escape:htmlall}</textarea>
-</tr>
-{include file="captcha.tpl" action="support"}
-<tr>
- <td>&nbsp;</td>
- <td><input type=submit value="Send" class=sbmt></td>
-</tr></table>
-</form>
-
-{/if}
-
-
-{include file="footer.tpl"}
+{include file="main_footer.tpl"}

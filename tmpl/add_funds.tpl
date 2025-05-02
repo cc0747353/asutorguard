@@ -16,24 +16,34 @@
 <input type=hidden name=h_id value=-1>
 <table cellspacing=0 cellpadding=2 border=0>
 <tr>
- <th>Processing</th>
- <th>Topup</th>
- <th>Balance</th>
+ <td>Your account balance ({$currency_sign}):</td>
+ <td align=right>{$currency_sign}{$ab_formated.total}</td>
 </tr>
-{foreach from=$ps item=p}
-<tr>
- <td><img src="images/{$p.id}.gif" width="44" height="17" align="absmiddle"> {$p.name}:</td>
- <td><input type=radio name=type value="process_{$p.id}" data-fiat="{$p.fiat}"></td>
- <td>{$p.available|fiat:$p.id}</td>
-</tr>
-{/foreach}
-</table>
-<br>
-
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <td>Amount to Spend ({fiat}):</td>
+<tr><td>&nbsp;</td>
+ <td align=right>
+  <small>
+{section name=p loop=$ps}
+   {if $ps[p].balance > 0}{$currency_sign}{$ps[p].balance} of {$ps[p].name}<br>{/if}
+{/section}
+  </small>
+ </td>
+</tr><tr>
+ <td>Amount to Spend ({$currency_sign}):</td>
  <td align=right><input type=text name=amount value='10.00' class=inpts size=15 style="text-align:right;"></td>
+</tr>
+<tr>
+  <td colspan=2>
+   <table cellspacing=0 cellpadding=2 border=0>
+{section name=p loop=$ps}
+   {if $ps[p].status}
+    <tr>
+     <td><input type=radio name=type value="process_{$ps[p].id}" {if $smarty.section.p.index == 0}checked{/if}></td>
+     <td>Spend funds from {$ps[p].name}</td>
+    </tr>
+   {/if}
+{/section}
+   </table>
+  </td>
 </tr>
 <tr>
  <td colspan=2><input type=submit value="Spend" class=sbmt></td>

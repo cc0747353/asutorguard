@@ -9,17 +9,15 @@
     <td class=inheader width=200><b>Active</b></td>
     <td class=inheader width=170><b>Total</b></td>
 </tr>
-{loaddata name="top_referrals" order="refs_add_funds" start_date=$settings.refs10_start_date limit=$settings.refs10_qusers var="stats"}
-
 {if $stats}
-{foreach from=$stats item=s name=ref}
+{section name=s loop=$stats}
 <tr>
- <td align=center><b>{$smarty.foreach.ref.index+1}</b></td>
- <td><b>{$s.username|escape:html}</b></td>
- <td align=right><b>{$s.active_col}</b></td>
- <td align=right><b>{$s.col}</b></td>
+ <td align=center><b>{$smarty.section.s.index+1}</b></td>
+ <td><b>{$stats[s].username}</b></td>
+ <td align=right><b>{$stats[s].active_col}</b></td>
+ <td align=right><b>{$stats[s].col}</b></td>
 </tr>
-{/foreach}
+{/section}
 {else}
 <tr>
  <td colspan=4 align=center>No referrers found</td>

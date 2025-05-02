@@ -1,46 +1,34 @@
 {include file="header.tpl"}
 
+{if $exchanged}
+
+<h3>Exchange is Completed.</h3>
+<br><br>
+<a href="{"?a=exchange"|encurl}">Return to the Exchange Center.</a>
+
+{else}
+
 <h3>Exchange Confirmation:</h3><br><br>
+{if $error} {if $error == 'no_from'}No "from" currency specified.{/if}
+{if $error == 'no_to'}No "to" currency specified.{/if}
+{if $error == 'no_amount'}No "to" amount specified.{/if}
+{if $error == 'to_big_amount'}You have not enough funds to exchange from.{/if}
+{if $error == 'exchange_forbidden'}The exchange for specified currencies is forbidden by the administrator.{/if}
+{if $error == 'on_hold'}Sorry, this amount on hold now.{/if}
+{if $error == 'to_small_amount'}The amount you have entered for exchange is too small. Please enter the amount that 
+can be exchanged to at least {$currency_sign}0.01.{/if} {else} 
 <form method=post name="exchange_form">
   <input type="hidden" name="a" value="exchange">
   <input type="hidden" name="action" value="exchange">
-  <input type="hidden" name="from" value="{$ex_from.ec}">
-  <input type="hidden" name="to" value="{$ex_to.ec}">
-  <input type="hidden" name="amount" value="{$ex_from.amount}">
-  <table cellspacing=0 cellpadding=2 border=0 class="form">
-  <tr>
-    <th>From:</th>
-    <td><img src="images/{$ex_from.ec}.gif" align=absmiddle>{$ex_from.name|escape:html}</td>
-    <th>Amount:</th>
-    <td>{$ex_from.amount|fiat:$ex_from.ec}</td>
-  </tr>
-  <tr>
-    <th>Commission:</th>
-    <td colspan=3>{$fees.percent}%</td>
-  </tr>
-  <tr>
-    <th>To:</th>
-    <td><img src="images/{$ex_to.ec}.gif" align=absmiddle>{$ex_to.name|escape:html}</td>
-    <th>Amount:</th>
-    <td>{$ex_to.amount|fiat:$ex_to.ec}</td>
-  </tr>
-{* You are trying to exchange {$currency_sign}{$amount} {$from_name} to {$currency_sign}{$exchange_amount} {$to_name}. *}
-  <tr>
-   <th></th>
-   <td><input type=submit name="button" value="Confirm" class=sbmt></td>
-  </tr>
+  <input type="hidden" name="from" value="{$from}">
+  <input type="hidden" name="to" value="{$to}">
+  <input type="hidden" name="amount" value="{$amount}">
+  <table cellspacing=0 cellpadding=2 border=0>
+  <tr><td>You are trying to exchange {$currency_sign}{$amount} {$from_name} to {$currency_sign}{$exchange_amount} {$to_name}.</td></tr>
+  <tr><td><br><input type=submit value="Confirm" class=sbmt></td></tr>
   </table>
-</form>
+  </form>
+  {/if}
 
-{literal}
-<script>
-function update_rate() {
-document.exchange_form.action.value = 'preview';
-document.exchange_form.button.disabled = true;
-document.exchange_form.submit();
-}
-setTimeout('update_rate()', 10*1000);
-</script>
-{/literal}
-
+{/if}
 {include file="footer.tpl"}

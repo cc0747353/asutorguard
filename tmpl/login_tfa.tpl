@@ -5,7 +5,7 @@
 You have entered invalid code.
 {/if}
 <br>
-<form method=post name=tfaform onsubmit="return checkform()">
+<form method=post name=mainform onsubmit="return checkform()">
 <input type=hidden name=a value='do_login_tfa'>
 <input type=hidden name=follow value='{$frm.follow}'>
 <input type=hidden name=follow_id value='{$frm.follow_id}'>
@@ -22,12 +22,12 @@ You have entered invalid code.
 
 {literal}
 <script language=javascript>
-document.tfaform.time.value = (new Date()).getTime();
+document.mainform.time.value = (new Date()).getTime();
 
 function checkform() {
-  if (!document.tfaform.code.value.match(/^[0-9]{6}$/)) {
+  if (!document.mainform.code.value.match(/^[0-9]{6}$/)) {
     alert("Please type code!");
-    document.tfaform.code.focus();
+    document.mainform.code.focus();
     return false;
   }
   return true;

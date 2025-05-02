@@ -14,8 +14,8 @@
 {foreach from=$last_add_funds item=s}
 <tr>
  <td class=menutxt><img src="images/{$s.ec}.gif"></td>
- <td class=menutxt>{$s.amount|fiat:$s.ec}</td>
- <td class=menutxt>{$s.date|substr:0:-3}</td>
+ <td class=menutxt>{$currency_sign}{$s.amount}</td>
+ <td class=menutxt>{$s.date}</td>
  <td class=menutxt>{$s.username}</td>
  </td>
 </tr>

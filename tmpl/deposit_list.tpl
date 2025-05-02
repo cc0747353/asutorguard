@@ -45,9 +45,7 @@
 {foreach from=$p.deposits item=d}
 <tr>
  <td align=center class=item><b>{$d.date}</b><br>{if $p.q_days == 0}Working {$d.duration} days{else}Expire in {$d.expire_in}{/if}</td>
- <td align=center class=item><b>{$d.deposit|fiat:$d.ec} <img src="images/{$d.ec}.gif" align=absmiddle hspace=1 height=17></b></td>
-
-
+ <td align=center class=item><b>{$currency_sign}{$d.deposit} <img src="images/{$d.ec}.gif" align=absmiddle hspace=1 height=17></b></td>
 {if $p.use_compound}
  <td align=center class=item align=center>{$d.compound}% <a href="{"?a=change_compound&deposit=`$d.id`"|encurl}">[change]</a></td>
 {/if}
@@ -70,9 +68,9 @@
 </table>
 {if $p.total_deposit > 0 || $p.today_profit > 0 || $p.total_profit > 0}
 <table cellspacing=0 cellpadding=1 border=0>
-<tr><td>Deposited Total:</td><td><b>{$p.total_deposit|fiat}</b></td></tr>
-<tr><td>Profit Today:</td><td><b>{$p.today_profit|fiat}</b></td></tr>
-<tr><td>Total Profit:</td><td><b>{$p.total_profit|fiat}</b></td></tr>
+<tr><td>Deposited Total:</td><td><b>{$currency_sign}{$p.total_deposit}</b></td></tr>
+<tr><td>Profit Today:</td><td><b>{$currency_sign}{$p.today_profit}</b></td></tr>
+<tr><td>Total Profit:</td><td><b>{$currency_sign}{$p.total_profit}</b></td></tr>
 </table>
 {/if}
 <br>

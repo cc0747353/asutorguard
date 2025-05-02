@@ -1,46 +1,172 @@
-{include file="logo.tpl"}
+<!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+        <title>Asutor Guard - HYIP Investment HTML Template</title>
+    
+        <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./assets/css/all.min.css">
+        <link rel="stylesheet" href="./assets/css/animate.css">
+        <link rel="stylesheet" href="./assets/css/odometer.css">
+        <link rel="stylesheet" href="./assets/css/nice-select.css">
+        <link rel="stylesheet" href="./assets/css/owl.min.css">
+        <link rel="stylesheet" href="./assets/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="./assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="./assets/css/flaticon.css">
+        <link rel="stylesheet" href="./assets/css/main.css">
+    
+        <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+        {literal}
+            <!-- Smartsupp Live Chat script -->
+            <script type="text/javascript">
+                var _smartsupp = _smartsupp || {};
+                _smartsupp.key = '3fcf20eb8c1dbbc4a5655a2c28e412d2f5a7109c';
+                window.smartsupp || (function(d) {
+                    var s, c, o = smartsupp = function() { o._.push(arguments) };
+                    o._ = [];
+                    s = d.getElementsByTagName('script')[0];
+                    c = d.createElement('script');
+                    c.type = 'text/javascript';
+                    c.charset = 'utf-8';
+                    c.async = true;
+                    c.src = 'https://www.smartsuppchat.com/loader.js?';
+                    s.parentNode.insertBefore(c, s);
+                })(document);
+            </script>
 
-{if $settings.reverse_columns}
-  <tr> 
-    <td valign="top">
-	 <table cellspacing=0 cellpadding=1 border=0 width=100% height=100%  class=line>
-	   <tr>
-	     <td>
-           <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
-             <tr class=bgcolorleft valign="top"> 
-{if $settings.show_news_box}
-              <td width=300 align=center class=bgcolorright><img src="images/q.gif" width=180 height=1>
-{if $settings.show_news_box}
-{include file="news_box.tpl"}
-{/if}
-              </td>
-              <td class=line valign="top" width=1><img src=images/q.gif width=1 height=1></td>
-{/if}
+        {/literal}
 
-              <td class=bgcolormain valign="top" width=99%>
-            <!-- Main: Start -->
-            <table width="100%" height="100%" border="0" cellpadding="10" cellspacing="0" class="forTexts">
-              <tr>
-                <td width=100% height=100% valign=top>
-<div class=framebody>
+     
 
-{else}
+    </head>
+    
+    <body>
+        <div class="main--body dashboard-bg">
+            <!--========== Preloader ==========-->
+            <div class="loader">
+                <div class="loader-inner">
+                    <div class="loader-line-wrap">
+                        <div class="loader-line"></div>
+                    </div>
+                    <div class="loader-line-wrap">
+                        <div class="loader-line"></div>
+                    </div>
+                    <div class="loader-line-wrap">
+                        <div class="loader-line"></div>
+                    </div>
+                    <div class="loader-line-wrap">
+                        <div class="loader-line"></div>
+                    </div>
+                    <div class="loader-line-wrap">
+                        <div class="loader-line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay"></div>
+            <!--========== Preloader ==========-->
+            
+            
+            <!--=======SideHeader-Section Starts Here=======-->
+            <div class="notify-overlay"></div>
+            <section class="dashboard-section">
+                <div class="side-header oh">
+                    <div class="cross-header-bar d-xl-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="site-header-container">
+                        <div class="side-logo">
+                            <a href="{"?a=home"|encurl}">
+                                <img src="./assets/images/logo/logo.svg" height="50px" width="160px" alt="logo">
+                            </a>
+                        </div>
+                        {include file="login_box.tpl"}
+                    </div>
+                </div>
+                <div class="dasboard-body">
+                    <div class="dashboard-hero mb-30">
+                        <div class="header-top">
+                            <div class="container">
+                                <div class="mobile-header d-flex justify-content-between d-lg-none align-items-center">
+                                    <div class="author">
+                                        <img src="./assets/images/dashboard/user.png" alt="dashboard">
+                                    </div>
+                                    <div class="cross-header-bar">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="mobile-header-content d-lg-flex flex-wrap justify-content-lg-between align-items-center">
+                                    <ul class="support-area">
+                                        <li>
+                                            <a href="{"?a=suport"|encurl}"><i class="flaticon-support"></i>Support</a>
+                                        </li>
+                                        <li>
+                                            <a href="Mailto:support@syscoglobalfinance.com"><i class="flaticon-email"></i><span class="__cf_email__" data-cfemail="620b0c040d220a1b0b120e030c064c010d0f">support@syscoglobalfinance.com</span> </a>
+                                        </li>
+                                  
+                                    </ul>
+                                    <div class="dashboard-header-right d-flex flex-wrap justify-content-center justify-content-sm-between justify-content-lg-end align-items-center">
+                                   
+                                        <ul class="dashboard-right-menus">
+                                            <li>
+                                                <a href="#0" class="author">
+                                                    <div class="thumb">
+                                                        <img src="./assets/images/dashboard/user.png" alt="dashboard">
+                                                        <span class="checked">
+                                                            <i class="flaticon-checked"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="content">
+                                                        <h6 class="title">{$userinfo.username}</h6>
+                                                    </div>
+                                                </a>
+                                                <div class="notification-area">
+                                                    <div class="author-header">
+                                                        <div class="thumb">
+                                                            <img src="./assets/images/dashboard/user.png" alt="dashboard">
+                                                        </div>
+                                                        <h6 class="title">{$userinfo.username}</h6>
+                                                        <a href="#mailto:{$userinfo.email}"><span class="__cf_email__">{$userinfo.email}</span></a>
+                                                    </div>
+                                                    <div class="author-body">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="{"?a=edit_account"|encurl}"><i class="far fa-user"></i>Profile</a>
+                                                            </li>
+                                                
+                                                            <li>
+                                                                <a href="{"?a=logout"|encurl}"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-hero-content text-white">
+                            <h3 class="title">Dashboard</h3>
+                            <ul class="breadcrumb">
+                                <li>
+                                    <a href="{"?a=home"|encurl}">Home</a>
+                                </li>
+                                <li>
+                                    Dashboard
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                       
 
-  <tr> 
-    <td valign="top">
-	 <table cellspacing=0 cellpadding=1 border=0 width=100% height=100%  class=line>
-	   <tr>
-	     <td>
-           <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
-             <tr class=bgcolorleft valign="top"> 
-              <td width=300 align=center><img src="images/q.gif" width=180 height=1>
-{include file="left.tpl"}
-              </td>
-              <td class=line valign="top" width=1><img src=images/q.gif width=1 height=1></td>          
-              <td class=bgcolormain valign="top" width=99%>
-            <!-- Main: Start -->
-            <table width="100%" height="100%" border="0" cellpadding="10" cellspacing="0" class="forTexts">
-              <tr>
-                <td width=100% height=100% valign=top>
-<div class=framebody>
-{/if}
+
+                        

@@ -32,7 +32,7 @@ function openCalculator(id)
 <table cellspacing=0 cellpadding=2 border=0>
 <tr>
  <td colspan=2>
-   Change the compounding percent for <b>{$deposit.deposit|fiat:$deposit.ec}</b> 
+   Change the compounding percent for <b>{$currency_sign}{$deposit.deposit}</b> 
    deposit in the <b>{$type.name|escape:html}</b>
  </td>
 </tr>

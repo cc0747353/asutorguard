@@ -41,17 +41,17 @@
 {if $deposit.ec_fees.fee}
 <tr>
  <th>Credit Amount:</th>
- <td>{$deposit.user_amount|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.user_amount}</td>
 </tr>
 <tr>
  <th>Deposit Fee:</th>
- <td>{$deposit.ec_fees.percent}% + {$deposit.ec_fees.add_amount|fiat:$deposit.ec} (min. {$deposit.ec_fees.fee_min|fiat:$deposit.ec} max. {$deposit.ec_fees.fee_max|fiat:$deposit.ec})</td>
+ <td>{$deposit.ec_fees.percent}% + {$currency_sign}{$deposit.ec_fees.add_amount} (min. {$currency_sign}{$deposit.ec_fees.fee_min} max. {$currency_sign}{$deposit.ec_fees.fee_max})</td>
 </tr>
 {/if}
 {if $deposit.converted_amount}
 <tr>
  <th>Debit Amount:</th>
- <td>{$deposit.converted_amount|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.converted_amount}</td>
 </tr>
 <tr>
  <th>{$deposit.converted_fiat} Debit Amount:</th>
@@ -60,7 +60,7 @@
 {else}
 <tr>
  <th>Debit Amount:</th>
- <td>{$deposit.amount|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.amount}</td>
 </tr>
 {/if}
 </table>

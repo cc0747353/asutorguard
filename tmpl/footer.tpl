@@ -1,66 +1,90 @@
-{if $settings.reverse_columns}
+
+</div>
+<div class="container-fluid sticky-bottom">
+    <div class="dashboard-footer">
+        <div class="d-flex flex-wrap justify-content-between m-0-15-none">
+            <div class="left">
+                &copy; 2020 <a href="#0">Asutor Guard</a> | All right reserved.
+            </div>
+            <div class="right">
+                <ul>
+                    <li>
+                        <a href="#0">Terms of use</a>
+                    </li>
+                    <li>
+                        <a href="#0">Privacy policy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<!--=======SideHeader-Section Ends Here=======-->
+
+
 </div>
 
-              </td>
-              </tr>
-            </table>
-            <!-- Main: END -->
+<script
+    data-cfasync="false"
+    src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+></script>
+<script src="./assets/js/jquery-3.3.1.min.js"></script>
+<script src="./assets/js/modernizr-3.6.0.min.js"></script>
+<script src="./assets/js/plugins.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/magnific-popup.min.js"></script>
+<script src="./assets/js/jquery-ui.min.js"></script>
+<script src="./assets/js/wow.min.js"></script>
+<script src="./assets/js/odometer.min.js"></script>
+<script src="./assets/js/viewport.jquery.js"></script>
+<script src="./assets/js/nice-select.js"></script>
+<script src="./assets/js/owl.min.js"></script>
+<script src="./assets/js/paroller.js"></script>
+<script src="./assets/js/chart.js"></script>
+<script src="./assets/js/circle-progress.js"></script>
+<script src="./assets/js/main.js"></script>
 
-              </td>
-              <td class=line valign="top" width=1><img src=images/q.gif width=1 height=1></td>          
-              <td width=300 align=center><img src="images/q.gif" width=180 height=1>
-{include file="left.tpl"}
-              </td>
+<script>
+    $('.progress1.circle').circleProgress({
+        value: .75,
+        fill: {
+            gradient: ['#00cca2', '#00cca2']
+        },
+    }).on('circle-animation-progress', function(event, progress) {
+        $(this).find('strong').html(Math.round(75 * progress) + '<i>%</i>');
+    });
+    $('.progress2.circle').circleProgress({
+        value: .90,
+        fill: {
+            gradient: ['#8d16e8', '#8d16e8']
+        },
+    }).on('circle-animation-progress', function(event, progress) {
+        $(this).find('strong').html(Math.round(90 * progress) + '<i>%</i>');
+    });
+    $('.progress3.circle').circleProgress({
+        value: .85,
+        fill: {
+            gradient: ['#ef764c', '#ef764c']
+        },
+    }).on('circle-animation-progress', function(event, progress) {
+        $(this).find('strong').html(Math.round(85 * progress) + '<i>%</i>');
+    });
+</script>
 
-             </tr>
-           </table>
-		  </td>
-		 </tr>
-	   </table>
-	 </td>
-  </tr>
+{literal}
+    <div class="gtranslate_wrapper"></div>
+    <script>
+        window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","alt_flags":{"en":"usa"}}
+    </script>
+    <script
+        src="https://cdn.gtranslate.net/widgets/latest/float.js"
+        defer
+    ></script>
 
+{/literal}
 
+</body>
 
-  <tr> 
-    <td height="19" class="forCopyright">All Rights Reserved. <a href='{$settings.site_url}' class="forCopyright">{$settings.site_name}</a></td>
-  </tr>
-</table>
-</center></body>
 </html>
-{else}
-</div>
-
-              </td>
-              </tr>
-            </table>
-            <!-- Main: END -->
-
-              </td>
-
-{if $settings.show_news_box}
-              <td class=line valign="top" width=1><img src=images/q.gif width=1 height=1></td>          
-              <td width=300 align=center class=bgcolorright><img src="images/q.gif" width=180 height=1>
-{if $settings.show_news_box}
-{include file="news_box.tpl"}
-{/if}
-                                   
-              </td>
-{/if}
-             </tr>
-           </table>
-		  </td>
-		 </tr>
-	   </table>
-	 </td>
-  </tr>
-
-
-
-  <tr> 
-    <td height="19" class="forCopyright">All Rights Reserved. <a href='{$settings.site_url}' class="forCopyright">{$settings.site_name}</a></td>
-  </tr>
-</table>
-</center></body>
-</html>
-{/if}

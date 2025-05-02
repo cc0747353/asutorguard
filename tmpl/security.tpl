@@ -34,14 +34,11 @@ Detect Browser Change<br>
 <input type="checkbox" name="tfa_on_login" value=1 {if $tfa_settings.login}checked{/if}> on Login<br>
 <input type="checkbox" name="tfa_on_edit_account" value=1 {if $tfa_settings.edit_account}checked{/if}> on Edit Account<br>
 <input type="checkbox" name="tfa_on_withdraw" value=1 {if $tfa_settings.withdraw}checked{/if}> on Withdraw<br>
-{if $settings.internal_transfer_enabled}
-<input type="checkbox" name="tfa_on_internal_transfer" value=1 {if $tfa_settings.internal_transfer}checked{/if}> on Internal Transfer<br>
-{/if}
 <input type="checkbox" name="tfa_disable" value=1> <b style=color:red>Disable Two Factor Authentication (not recommended)</b><br>
 <br>
 Confirm by typing code: <input type=text name="code" class=inpts> <input type=submit value="Update" class=sbmt>
 {else}
-1. Install <a href="http://m.google.com/authenticator" target=_blank>Google Authenticator</a> on your mobile device.<br>
+1. Install <a href="http://m.google.com/authenticator" targe=_blank>Google Authenticator</a> on your mobile device.<br>
 2. Your Secret Code is: <b>{$tfa_secret}</b> <input type=hidden name="tfa_secret" value="{$tfa_secret}"><br>
 <img src="{$tfa_secret_url}"><br>
 3. Please enter two factor token from Google Authenticator to verify correct setup:<br> 

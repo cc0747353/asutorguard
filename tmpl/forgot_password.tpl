@@ -20,9 +20,10 @@ Invalid turing image<br><br>
 
 
 {if $found_records == 2}
-Your account was found. Please check your e-mail address and follow the confirmation URL to reset your password.
+Your accound was found. Please check your e-mail address and follow confirm URL to reset your password.
 <br><br>
 {else}
+
 {if $found_records == 0}
 No accounts found for provided info.
 <br><br>

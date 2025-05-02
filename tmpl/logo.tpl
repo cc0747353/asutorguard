@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>{$meta_title|default:$settings.site_name}</title>
+<title>{$settings.site_name}</title>
 <base href="{$settings.site_url}/" src="{$settings.site_url}/" />
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>

@@ -1,138 +1,187 @@
 {include file="header.tpl"}
 
-<h3>Your Referrals:</h3><br>
-{if $upline.email != ""}
-Your upline is <a href=mailto:{$upline.email}>{$upline.name}</a><br><br>
-{/if}
-<br>
-<table width=300 cellspacing=1 cellpadding=1>
-<tr>
-  <td class=item>Referrals:</td>
-  <td class=item>{$total_ref}</td>
-</tr><tr>
-  <td class=item>Active referrals:</td>
-  <td class=item>{$active_ref}</td>
-</tr><tr>
-  <td class=item>Total referral commission:</td>
-  <td class=item>{$currency_sign}{$commissions}</td>
-</tr>
-</table>
-<br>
+<div class="partners">
+  <h3 class="main-title">Referrals</h3>
+  <div class="referral-group">
+      <div class="refers">
+          <div class="referral-links">
+              <div class="oh">
+                  <div class="referral-left">
+                      <span class="left-icon">
+                          <i class="fas fa-link"></i>
+                      </span>
+                      <h6>Referral Link:</h6>
+                      <div class="copy-button">
+                          <a href="#0" class="custom-button" id="copy">Copy Link</a>
+                      </div>
+                      <input type="text" id="copyLinks" readonly value="https://syscoglobalfinance.com/?ref={$userinfo.username}">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row mb-30-none">
+    <div class="col-lg-6">
+      <div class="earn-item mb-30">
+        <div class="earn-thumb">
+          <img
+            src="./assets/images/dashboard/earn/08.png"
+            alt="dashboard-earn"
+          >
+        </div>
+        <div class="earn-content">
+          <h6 class="title">Number of referrals</h6>
+          <div class="click-number">
+            {$total_ref}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="earn-item mb-30">
+        <div class="earn-thumb">
+          <img
+            src="./assets/images/dashboard/earn/08.png"
+            alt="dashboard-earn"
+          >
+        </div>
+        <div class="earn-content">
+          <h6 class="title">Number of Active referrals</h6>
+          <div class="click-number">
+            {$active_ref}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="earn-item mb-30">
+        <div class="earn-thumb">
+          <img
+            src="./assets/images/dashboard/earn/08.png"
+            alt="dashboard-earn"
+          >
+        </div>
+        <div class="earn-content">
+          <h6 class="title">Total referral commission</h6>
+          <div class="click-number">
+            {$currency_sign}{$commissions}
+          </div>
+        </div>
+      </div>
+    </div>
+    {if $upline.email != ""}
+    <div class="col-lg-6">
+      <div class="earn-item mb-30">
+        <div class="earn-thumb">
+          <img
+            src="./assets/images/dashboard/earn/08.png"
+            alt="dashboard-earn"
+          >
+        </div>
+        <div class="earn-content">
+          <h6 class="title">Your upline</h6>
+          <div class="click-number">
+            {$upline.name}
+          </div>
+        </div>
+      </div>
+    </div>
+    {/if}
+  </div>
+</div>
+
 
 {if $settings.show_refstat}
-<h3>Referral ins/signups</h3><br>
-<table cellspacing=0 cellpadding=1 border=0>
-<form method=post name=opts>
-<input type=hidden name=a value=referals>
- <td align=right>
-From: </td>
-<td>
-<select name=month_from class=inpts>
-{section name=month_from loop=$month}
-<option value={$smarty.section.month_from.index+1} {if $smarty.section.month_from.index+1 == $frm.month_from}selected{/if}>{$month[month_from]}
-{/section}
-</select> &nbsp;
-<select name=day_from class=inpts>
-{section name=day_from loop=$day}
-<option value={$smarty.section.day_from.index+1} {if $smarty.section.day_from.index+1 == $frm.day_from}selected{/if}>{$day[day_from]}
-{/section}
-</select> &nbsp;
-<select name=year_from class=inpts>
-{section name=year_from loop=$year}
-<option value={$year[year_from]} {if $year[year_from] == $frm.year_from}selected{/if}>{$year[year_from]}
-{/section}
-</select>
-</td>
- <td rowspan=2>
-	&nbsp; <input type=submit value="Go" class=sbmt>
- </td>
-</tr>
-<tr><td align=right>To:</td><td> <select name=month_to class=inpts>
-{section name=month_to loop=$month}
-<option value={$smarty.section.month_to.index+1} {if $smarty.section.month_to.index+1 == $frm.month_to}selected{/if}>{$month[month_to]}
-{/section}
-</select> &nbsp;
-<select name=day_to class=inpts>
-{section name=day_to loop=$day}
-<option value={$smarty.section.day_to.index+1} {if $smarty.section.day_to.index+1 == $frm.day_to}selected{/if}>{$day[day_to]}
-{/section}
-</select> &nbsp;
 
-<select name=year_to class=inpts>
-{section name=year_to loop=$year}
-<option value={$year[year_to]} {if $year[year_to] == $frm.year_to}selected{/if}>{$year[year_to]}
-{/section}
-</select>
+  <h3>Referral ins/signups</h3><br>
 
- </td>
-</tr></form></table>
+    <table class="transaction-table">
+      <thead>
+          <tr>
+              <th>DATE AND TIME</th>
+              <th>Ins</th>
+              <th>Signups</th>
+          </tr>
+      </thead>
+      <tbody>
+        {if $show_refstat}
+          {section name=s loop=$refstat}
+            <tr>
+              <td>
+                <i class="far fa-calendar"></i>{$refstat[s].date}
+              </td>
+              <td>
+                {$refstat[s].income}
+              </td>
+              <td>
+                {$refstat[s].reg}
+              </td>
+            </tr>
+          {/section}
+        {else}
+          <tr>
+            <td>
+              No statistics found for this period.
+            </td>
+          </tr>
+        {/if}
 
 
-<table width=300 celspacing=1 cellpadding=1 border=0>
-<tr>
- <td class=inheader>Date</td>
- <td class=inheader>Ins</td>
- <td class=inheader>Signups</td>
-</tr>
-{if $show_refstat}
-{section name=s loop=$refstat}
-<tr>
- <td class=item align=center><b>{$refstat[s].date}</b></td>
- <td class=item align=right>{$refstat[s].income}</td>
- <td class=item align=right>{$refstat[s].reg}</td>
-</tr>
-{/section}
-{else}
-<tr>
- <td class=item align=center colspan=3>No statistics found for this period.</td>
-</tr>
-{/if}
-</table><br>
+      </tbody>
+    </table>
 {/if}
 
 {if $settings.show_referals}
-{if $show_referals}
-<h3>Your referrals:</h3>
-<table cellspacing=1 cellpadding=1 border=0>
-<tr>
- <td class=inheader>Nickname</td>
- <td class=inheader>E-mail</td>
- <td class=inheader>Status</td>
-</tr>
-{section name=s loop=$referals}
-<tr>
- <td class=item><b>{$referals[s].username}</b></td>
- <td class=item><a href=mailto:{$referals[s].email}>{$referals[s].email}</a></td>
- <td class=item>{if $referals[s].q_deposits > 0}Deposited{else}No deposit yet{/if}</td>
-</tr>
-{if $referals[s].ref_stats}
-<tr>
- <td colspan=3>
-  User referrals:
-  {section name=l loop=$referals[s].ref_stats}
-   <nobr>{$referals[s].ref_stats[l].cnt_active} active of {$referals[s].ref_stats[l].cnt} on level {$referals[s].ref_stats[l].level}{if !$smarty.section.l.last};{/if}</nobr>
-  {/section}
- </td>
-</tr>
+  {if $show_referals}
+    <h3>Your referrals:</h3>
+    <table class="transaction-table">
+
+      <tr>
+        <th>Nickname</th>
+        <th>E-mail</th>
+        <th>Status</th>
+      </tr>
+      {section name=s loop=$referals}
+        <tr>
+          <td ><b>{$referals[s].username}</b></td>
+          <td ><a href=mailto:{$referals[s].email}>{$referals[s].email}</a></td>
+          <td >{if $referals[s].q_deposits > 0}Deposited{else}No deposit yet{/if}</td>
+        </tr>
+        {if $referals[s].ref_stats}
+          <tr>
+            <td >
+              User referrals:
+              {section name=l loop=$referals[s].ref_stats}
+                <nobr>{$referals[s].ref_stats[l].cnt_active} active of {$referals[s].ref_stats[l].cnt} on level
+                  {$referals[s].ref_stats[l].level}{if !$smarty.section.l.last};{/if}</nobr>
+              {/section}
+            </td>
+          </tr>
+        {/if}
+        {if $referals[s].came_from}
+          <tr>
+            <td >
+              <a
+                href="{$referals[s].came_from}"
+                target=_blank
+              >[User came from]</a>
+            </td>
+          </tr>
+        {/if}
+      {/section}
+      <tr>
+        <td >&nbsp;</td>
+      </tr>
+      <tr>
+        <td ><b>2-10 level referrals:</b> {$cnt_other}</td>
+      </tr>
+      <tr>
+        <td ><b>2-10 level active referrals:</b> {$cnt_other_active}</td>
+      </tr>
+    </table>
+  {/if}
 {/if}
-{if $referals[s].came_from}
-<tr><td colspan=3>
-<a href="{$referals[s].came_from}" target=_blank>[User came from]</a>
-</td></tr>
-{/if}
-{/section}
-<tr>
- <td colspan=3>&nbsp;</td>
-</tr>
-<tr>
- <td colspan=3><b>2-10 level referrals:</b> {$cnt_other}</td>
-</tr>
-<tr>
- <td colspan=3><b>2-10 level active referrals:</b> {$cnt_other_active}</td>
-</tr>
-</table>
-{/if}
-{/if}
+
 
 
 {include file="footer.tpl"}

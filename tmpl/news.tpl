@@ -18,7 +18,7 @@ Not Found
 {loaddata name="news" var=news page=$frm.p limit=20 pages_var=pages}
 {foreach from=$news item=n}
 <tr>
- <td align=justify><a name="{$n.id}"></a><a href="{"?a=news&id=`$n.id`"|encurl}">{$n.title}</a><br>
+ <td align=justify><a name="{$n.id}"></a><a href="{"?a=news&id=`$n.i`"|encurl}">{$n.title}</a><br>
   {$n.full_text}<br>
   <small><i>{$n.date}</i></small>
  </td>

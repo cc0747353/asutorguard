@@ -1,4 +1,4 @@
-{include file="header.tpl"}
+{include file="auth_header.tpl"}
 
 {literal}
 <script language=javascript>
@@ -18,40 +18,44 @@ function checkform() {
 </script>
 {/literal}
 
+
 {if $frm.say eq 'invalid_login'}
-<h3>Login error:</h3><br><br>
-
-<div class="error">Your login or password or turing image code is wrong. Please check this information.</div>
-{if $bf_tries.status}
-{if $bf_tries.left == 0}
-<div class="error">You have already maximum times entered incorrectly login info. Your account is blocked. Check your email to active.</div>
-{else}
-<div class="error">You have <b>{$bf_tries.left}</b> tries to entered correctly login information befor blocking.</div>
-{/if}
+<p class="text-danger">
+  Your Username or Password or turing image code is wrong. Please check this information.
+</p>
 {/if}
 
-{/if}
-<h3>Login:</h3>
-<br>
-<form method=post name=mainform onsubmit="return checkform()">
-<input type=hidden name=a value='do_login'>
-<input type=hidden name=follow value='{$frm.follow}'>
-<input type=hidden name=follow_id value='{$frm.follow_id}'>
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <td>Username:</td>
- <td><input type=text name=username value='{$frm.username|escape:"html"}' class=inpts size=30 autofocus="autofocus"></td>
-</tr><tr>
- <td>Password:</td>
- <td><input type=password name=password value='' class=inpts size=30></td>
-</tr>
-{include file="captcha.tpl" action="login"}
-<tr>
- <td>&nbsp;</td>
- <td><input type=submit value="Login" class=sbmt></td>
-</tr></table>
-</form>
-<br><br>
-or <a href="{"?a=forgot_password"|encurl}">remember your login information</a>.
 
-{include file="footer.tpl"}
+<div class="account-wrapper">
+  <div class="account-body">
+      <h4 class="title mb-20">Welcome To Syscoglobalfinance.com</h4>
+        <form method=post name=mainform onsubmit="return checkform()" class="account-form">
+        <input type=hidden name=a value='do_login'>
+        <input type=hidden name=follow value='{$frm.follow}'>
+        <input type=hidden name=follow_id value='{$frm.follow_id}'>
+          <div class="form-group">
+              <label for="sign-up">Your Username </label>
+              <input type="text" placeholder="Enter Your Username " id="sign-up" name=username value='{$frm.username|escape:"html"}'>
+          </div>
+          <div class="form-group">
+              <label for="pass">Password</label>
+              <input type="password" placeholder="Enter Your Password" id="pass" name="password">
+              <span class="sign-in-recovery">Forgot your password? <a href="{"?a=forgot_password"|encurl}">recover password</a></span>
+          </div>
+          <div class="form-group text-center">
+            <button
+              type="submit"
+              class="mt-2 mb-30"
+            >Login</button>
+            <div class="section-header">
+              <span
+                class="cate"
+                style="color: #576288"
+              >Don't have an account yet? <a href="?a=signup">Sign Up</a></span>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>
+
+{include file="auth_footer.tpl"}

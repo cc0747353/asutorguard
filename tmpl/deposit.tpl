@@ -1,294 +1,324 @@
 {include file="header.tpl"}
 
-{if $fatal}
 
-{if $fatal == 'one_per_month'}
-You can deposit once a month only.
-{/if}
+<div class="deposit">
+  <h3 class="main-title">Make Deposits</h3>
 
-{else}
+  {if $fatal}
 
-{literal}
-<script language="javascript"><!--
-function openCalculator(id)
-{
+    {if $fatal == 'one_per_month'}
+      You can deposit once a month only.
+    {/if}
 
-  w = 225; h = 400;
-  t = (screen.height-h-30)/2;
-  l = (screen.width-w-30)/2;
-  window.open('?a=calendar&type=' + id, 'calculator' + id, "top="+t+",left="+l+",width="+w+",height="+h+",resizable=1,scrollbars=0");
+  {else}
 
-{/literal}
-  {if $qplans > 1}
-{literal}
-  for (i = 0; i < document.spendform.h_id.length; i++)
-  {
-    if (document.spendform.h_id[i].value == id)
-    {
-      document.spendform.h_id[i].checked = true;
-    }
-  }
-{/literal}
+
+
+    {if $frm.say eq 'deposit_success'}
+      <h3>The deposit has been successfully saved.</h3>
+      <br><br>
+    {/if}
+
+    {if $frm.say eq 'deposit_saved'}
+      <h3>The deposit has been saved. It will become active when the administrator checks statistics.</h3><br><br>
+    {/if}
+
+    <br>
+    {if $errors}
+      {if $errors.less_min}
+        Sorry, you can deposit not less than {$currency_sign}{$errors.less_min} with selected processing<br><br>
+      {/if}
+      {if $errors.greater_max}
+        Sorry, you can deposit not greater than {$currency_sign}{$errors.greater_max} with selected processing<br><br>
+      {/if}
+      {if $errors.ec_forbidden}
+        Sorry, deposit with selected processing is temproary forbidden.<br><br>
+      {/if}
+      {if $errors.cannot_invest_this_plan_anymore}
+        Sorry, you cannot invest this plan anymore<br><br>
+      {/if}
+    {/if}
+
+
+    <form
+      method=post
+      name="spendform"
+    >
+      <input
+        type=hidden
+        name=a
+        value=deposit
+      >
+      {if $qplans > 1} <h4 class="main-subtitle">01. Select the Plan</h4>
+      {/if}
+
+      <div class="deposit-wrapper">
+
+        {section name=plans loop=$plans}
+          <div class="deposit-item">
+            <div class="deposit-inner">
+
+              {* checkbox for plan *}
+              {if $qplans > 1}
+
+                <div class="check_box_group pb-2 ml-4">
+                  <input
+                    type="radio"
+                    name=h_id
+                    id="{$plans[plans].id}"
+                    value='{$plans[plans].id}'
+                    {if (($smarty.section.plans.first == 1) && ($frm.h_id eq '')) || ($frm.h_id == $plans[plans].id)}
+                      checked
+                    {/if}
+                  >
+                  <label for="{$plans[plans].id}"><b>{$plans[plans].name}</b></label>
+                </div>
+
+              {else}
+                <input
+                  type=hidden
+                  name=h_id
+                  value='{$plans[plans].id}'
+                >
+
+
+              {/if}
+              {* checkbox for plan end*}
+
+              {* plan info *}
+              {section name=options loop=$plans[plans].plans}
+                <div class="deposit-header">
+                  <h3 class="title">{$plans[plans].plans[options].percent}%</h3>
+                  <span><b> R.0.I</b></span>
+                </div>
+                <div class="deposit-body">
+                  <div class="item">
+                    <div class="item-thumb">
+                      <img
+                        src="./assets/images/offer/offer1.png"
+                        alt="offer"
+                      >
+                    </div>
+                    <div class="item-content">
+                      <h5 class="title">Deposit</h5>
+                      <h5 class="subtitle">
+                        <span class="min">${$plans[plans].plans[options].min_deposit}</span>
+                        <span class="to">to</span>
+                        <span class="max">${$plans[plans].plans[options].max_deposit}</span>
+                      </h5>
+                    </div>
+                  </div>
+                  <span class="bal-shape"></span>
+                  <div class="item">
+                    <div class="item-thumb">
+                      <img
+                        src="./assets/images/offer/offer2.png"
+                        alt="offer"
+                      >
+                    </div>
+                    <div class="item-content">
+                      <h5 class="title">Terms</h5>
+                      <h5 class="subtitle">{$plans[plans].plans[options].name|escape:html} days</h5>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="#0"
+                  class="select-plan"
+                ><i class="fas fa-plus"></i></a>
+
+              {/section}
+
+              {* plan info end *}
+
+
+
+
+            </div>
+          </div>
+        {/section}
+
+      </div>
+
+      <div class="deposit-system">
+        <h4 class="main-subtitle">02. Choose Payment System</h4>
+
+        <div class="tab faq-tab">
+          <ul class="tab-menu">
+            <li id="account-balance-button">Account Balance</li>
+            <li
+              id="external-wallet-button"
+              class="active"
+            >External Wallet</li>
+          </ul>
+        </div>
+
+
+        <div id="accountBalanceCodeBlock">
+          <h4 class="main-subtitle">Account Balance</h4>
+          <div class="text-center deposit-method-slider owl-theme owl-carousel">
+
+
+            {section name=p loop=$ps}
+              {if $ps[p].balance > 0 and $ps[p].status == 1}
+                <a
+                  href="#0"
+                  class="deposit-method-item p-3"
+                >
+                  <input
+                    type="radio"
+                    id="checkbox-{$ps[p].id}"
+                    name=type
+                    value="account_{$ps[p].id}"
+                    hidden
+                  >
+
+                  <div class="thumb p-3">
+                    <div class="check">
+                      <img
+                        src="./assets/images/dashboard/payment/check.png"
+                        alt="payment"
+                      >
+                    </div>
+                    <img
+                      src="./assets/images/dashboard/payment/{$ps[p].id}.svg"
+                      alt="payment"
+                    >
+
+                    <span
+                      class="cl-1"
+                      style="font-size: 12px;font-weight:bold;color: #3b465e; display: inline-block; text-align: start; overflow: hidden; text-overflow: ellipsis; width: 80px;"
+                    >
+                      {$ps[p].name}</span>
+                  </div>
+
+                </a>
+              {/if}
+            {/section}
+          </div>
+        </div>
+
+        <div id="externalWalletCodeBlock">
+          <h4 class="main-subtitle">External Wallet</h4>
+
+          <div class="text-center deposit-method-slider owl-theme owl-carousel">
+
+            {section name=p loop=$ps}
+              {if $ps[p].status} <a
+                  href="#0"
+                  class="deposit-method-item p-3"
+                >
+                  <input
+                    type="radio"
+                    id="checkbox-{$ps[p].id}"
+                    name=type
+                    value="process_{$ps[p].id}"
+                    hidden
+                  >
+                  <div class="thumb p-3">
+                    <div class="check">
+                      <img
+                        src="./assets/images/dashboard/payment/check.png"
+                        alt="payment"
+                      >
+                    </div>
+                    <img
+                      src="./assets/images/dashboard/payment/{$ps[p].id}.svg"
+                      alt="payment"
+                    >
+                    <span
+                      class="cl-1"
+                      style="font-size: 12px;font-weight:bold;color: #3b465e; display: inline-block; text-align: start; overflow: hidden; text-overflow: ellipsis; width: 80px;"
+                    >
+                      {$ps[p].name}</span>
+
+                  </div>
+                </a>
+
+              {/if}
+            {/section}
+          </div>
+        </div>
+
+
+      </div>
+
+      {literal}
+
+        <script>
+          const checkboxes = document.querySelectorAll('.deposit-method-item');
+
+          checkboxes.forEach(depositMethodItem => {
+            depositMethodItem.addEventListener('click', () => {
+              event.preventDefault();
+              const radio = depositMethodItem.querySelector('input[type="radio"]');
+              radio.checked = true;
+
+              checkboxes.forEach(depositMethodItem => {
+                depositMethodItem.classList.remove('active');
+              });
+    
+              depositMethodItem.classList.add('active');
+            });
+          });
+        </script>
+            
+        <script>
+          document.getElementById("accountBalanceCodeBlock").style.display = "none";
+          document.getElementById("externalWalletCodeBlock").style.display = "none";
+        
+          document.getElementById("account-balance-button").addEventListener("click", function() {
+            document.getElementById("accountBalanceCodeBlock").style.display = "block";
+            document.getElementById("externalWalletCodeBlock").style.display = "none";
+          });
+        
+          document.getElementById("external-wallet-button").addEventListener("click", function() {
+            document.getElementById("accountBalanceCodeBlock").style.display = "none";
+            document.getElementById("externalWalletCodeBlock").style.display = "block";
+          });
+        </script>
+
+      {/literal}
+
+      
+      <div class="deposit-system ">
+        <h4 class="main-subtitle">03. Enter the amount of Deposit:</h4>
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Enter your amount"
+            class="make-amount"
+            name=amount
+            value='{$min_deposit}'
+          >
+        </div>
+
+        <div class="form-group w-25">
+          <button
+            type="submit"
+            class="custom-button border-0"
+          >Spend</button>
+        </div>
+      </div>
+
+    </form>
+
+
+
+    {literal}
+      <script language=javascript>
+        for (i = 0; i < document.spendform.type.length; i++) {
+          if ((document.spendform.type[i].value.match(/^process_/))) {
+            document.spendform.type[i].checked = true;
+            break;
+          }
+        }
+        updateCompound();
+      </script>
+    {/literal}
+
   {/if}
-{literal}
-
-}
-
-function updateCompound() {
-  var id = 0;
-  var tt = document.spendform.h_id.type;
-  if (tt && tt.toLowerCase() == 'hidden') {
-    id = document.spendform.h_id.value;
-  } else {
-    for (i = 0; i < document.spendform.h_id.length; i++) {
-      if (document.spendform.h_id[i].checked) {
-        id = document.spendform.h_id[i].value;
-      }
-    }
-  }
-
-  var cpObj = document.getElementById('compound_percents');
-  if (cpObj) {
-    while (cpObj.options.length != 0) {
-      cpObj.options[0] = null;
-    }
-  }
-
-  if (cps[id] && cps[id].length > 0) {
-    document.getElementById('coumpond_block').style.display = '';
-
-    for (i in cps[id]) {
-      cpObj.options[cpObj.options.length] = new Option(cps[id][i]);
-    }
-  } else {
-    document.getElementById('coumpond_block').style.display = 'none';
-  }
-}
-var cps = {};
---></script>
-{/literal}
-
-{if $frm.say eq 'deposit_success'}
-<h3>The deposit has been successfully saved.</h3>
-<br><br>
-{/if}
-
-{if $frm.say eq 'deposit_saved'}
-<h3>The deposit has been saved. It will become active when the administrator checks statistics.</h3><br><br>
-{/if}
-
-<h3>Make a Deposit:</h3>
-<br>
-{if $errors}
-{if $errors.less_min}
-Sorry, you can deposit not less than {$currency_sign}{$errors.less_min} with selected processing<br><br>
-{/if}
-{if $errors.greater_max}
-Sorry, you can deposit not greater than {$currency_sign}{$errors.greater_max} with selected processing<br><br>
-{/if}
-{if $errors.not_enough_funds}
-You have no enough funds to complete the operation.<br><br>
-{/if}
-{if $errors.ec_forbidden}
-Sorry, deposit with selected processing is temproary forbidden.<br><br>
-{/if}
-{if $errors.cannot_invest_this_plan_anymore}
-Sorry, you cannot invest this plan anymore<br><br>
-{/if}
-{if $errors.external_deposits_disabled}
-Deposit to this plan from external processing is forbidden.
-{/if}
-{if $errors.internal_deposits_disabled}
-Deposit to this plan from balance is forbidden.
-{/if}
-{if $errors.no_ps}
-Please, select funds source.
-{/if}
-{if $errors.deposits_amount_exeeded}
-Your total deposit in &quot;{$errors.deposits_amount_exeeded.plan|escape:html}&quot; should not more than {$errors.deposits_amount_exeeded.amount_limit|fiat}<br><br>
-{/if}
-{/if}
-
-<form method=post name="spendform">
-<input type=hidden name=a value=deposit>
-{if $qplans > 1} Select a plan:<br>{/if}
+</div>
 
 
-{foreach from=$plans item=plan name=fplans}
-<table cellspacing=1 cellpadding=2 border=0 width=100%>
-<tr>
- <td colspan=3>
-{if $plans|@count > 1}
-	<input type=radio name=h_id value="{$plan.id}" {if (($smarty.foreach.fplans.first == 1) && (!$frm.h_id)) || ($frm.h_id == $plan.id)} checked {/if} onclick="updateCompound()"> 
-{else}
-	<input type=hidden name=h_id value="{$plan.id}">
-{/if}
-
-<b>{$plan.name|escape:html}</b></td>
-</tr><tr>
- <td class=inheader>Plan</td>
- <td class=inheader width=200>Spent Amount (<span class="fiat">{fiat}</span>)</td>
- <td class=inheader width=100 nowrap><nobr>{$plan.period} Profit (%)</nobr></td>
-</tr>
-{foreach from=$plan.plans item=o}
-<tr>
- <td class=item>{$o.name|escape:html}</td>
- <td class=item align=right><span class="min_deposit">{$o.min_deposit|fiat}</span> - <span class="max_deposit">{if $o.max_deposit == 0}&infin;{else}{$o.max_deposit|fiat}{/if}</span></td>
- <td class=item align=right>{$o.percent}%</td>
-</tr>
-{/foreach}
-{if $settings.enable_calculator}
-<tr>
- <td colspan=3 align=right><a href="javascript:openCalculator('{$plan.id}')">Calculate your profit &gt;&gt;</a></td>
-</tr>
-{/if}
-</table><br><br>
-<script>
-cps[{$plan.id}] = {$plan.compound_percents_json};
-</script>
-{/foreach}
-
-{*
-{section name=plans loop=$plans}
-<table cellspacing=1 cellpadding=2 border=0 width=100%>
-<tr>
- <td colspan=3>
-{if $qplans > 1}
-	<input type=radio name=h_id value='{$plans[plans].id}' {if (($smarty.section.plans.first == 1) && ($frm.h_id eq '')) || ($frm.h_id == $plans[plans].id)} checked {/if} onclick="updateCompound()"> 
-<!--	<input type=radio name=h_id value='{$plans[plans].id}' {if (($smarty.section.plans.first == 1) && ($frm.h_id eq '')) || ($frm.h_id == $plans[plans].id)} checked {/if} {if $compounding_available > 0}onclick="document.spendform.compound.disabled={if $plans[plans].use_compound == 1}false{else}true{/if};"{/if}> -->
-{else}
-	<input type=hidden name=h_id value='{$plans[plans].id}'>
-{/if}
-
-	<b>{$plans[plans].name}</b></td>
-</tr><tr>
- <td class=inheader>Plan</td>
- <td class=inheader width=200>Spent Amount ({$currency_sign})</td>
- <td class=inheader width=100 nowrap><nobr>{$plans[plans].period} Profit (%)</nobr></td>
-</tr>
-{section name=options loop=$plans[plans].plans}
-<tr>
- <td class=item>{$plans[plans].plans[options].name|escape:html}</td>
- <td class=item align=right>{$plans[plans].plans[options].deposit}</td>
- <td class=item align=right>{$plans[plans].plans[options].percent}</td>
-</tr>
-{/section}
-{if $settings.enable_calculator}
-<tr>
- <td colspan=3 align=right><a href="javascript:openCalculator('{$plans[plans].id}')">Calculate your profit &gt;&gt;</a></td>
-</tr>
-{/if}
-</table><br><br>
-<script>
-cps[{$plans[plans].id}] = {$plans[plans].compound_percents_json};
-</script>
-{/section}
-*}
-
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <td>Account Balance:</td>
- <td>{$currency_sign}<b>{$userinfo.balance_totals.balance|amount_format}</b></td>
-</tr>
-</table>
-<br>
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <th>Processing</th>
- <th>Topup</th>
- <th>Balance</th>
-</tr>
-{foreach from=$dps item=p name=p}
-<tr>
- <td><img src="images/{$p.id}.gif" width="44" height="17" align="absmiddle"> {$p.name}:</td>
- <td><input type=radio name=type value="process_{$p.id}" {if $frm.type == "process_`$p.id`"}checked{/if} data-fiat="{$p.fiat}"></td>
- <td><input type=radio name=type value="account_{$p.id}" {if $frm.type == "account_`$p.id`"}checked{/if} data-fiat="{$p.fiat}" {if $p.available <= 0}disabled{/if}> {$p.available|fiat:$p.id}</td>
-</tr>
-{/foreach}
-</table>
-<br>
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <td>Amount to Spend ({$currency_sign}):</td>
- <td align=right><input type=text name=amount value='{$frm.amount|default:$min_deposit|amount_format}' class=inpts size=15 style="text-align:right;"></td>
-</tr>
-<tr id="coumpond_block" style="display:none">
- <td>Compounding(%):</td>
- <td align=right>
-  <select name="compound" class=inpts id="compound_percents"></select>
- </td>
-</tr>
-<tr>
- <td colspan=2><input type=submit value="Spend" class=sbmt></td>
-</tr>
-</table>
-
-{*
-<table cellspacing=0 cellpadding=2 border=0>
-<tr>
- <td>Your account balance ({$currency_sign}):</td>
- <td align=right>{$currency_sign}{$ab_formated.total}</td>
-</tr>
-<tr><td>&nbsp;</td>
- <td align=right>
-  <small>
-{section name=p loop=$ps}
-   {if $ps[p].balance > 0}{$currency_sign}{$ps[p].balance} of {$ps[p].name}{if $hold[p].amount > 0} / {$currency_sign}{$hold[p].amount} on hold{/if}<br>{/if}
-{/section}
-  </small>
- </td>
-</tr>
-<tr>
- <td>Amount to Spend ({$currency_sign}):</td>
- <td align=right><input type=text name=amount value='{$frm.amount|default:$min_deposit|amount_format}' class=inpts size=15 style="text-align:right;"></td>
-</tr>
-<tr id="coumpond_block" style="display:none">
- <td>Compounding(%):</td>
- <td align=right>
-  <select name="compound" class=inpts id="compound_percents"></select>
- </td>
-</tr>
-<tr>
-  <td colspan=2>
-   <table cellspacing=0 cellpadding=2 border=0>
-{section name=p loop=$ps}
-   {if $ps[p].balance > 0 and $ps[p].status == 1}
-    <tr>
-     <td><input type=radio name=type value="account_{$ps[p].id}" {if $frm.type == "account_`$ps[p].id`"}checked{/if}></td>
-     <td>Spend funds from the Account Balance {$ps[p].name}</td>
-    </tr>
-   {/if}
-{/section}
-{section name=p loop=$ps}
-   {if $ps[p].status}
-    <tr>
-     <td><input type=radio name=type value="process_{$ps[p].id}" {if $frm.type == "process_`$ps[p].id`"}checked{/if}{if !$frm.type && $smarty.section.p.index == 0}checked{/if}></td>
-     <td>Spend funds from {$ps[p].name}</td>
-    </tr>
-   {/if}
-{/section}
-   </table>
-  </td>
-</tr>
-<tr>
- <td colspan=2><input type=submit value="Spend" class=sbmt></td>
-</tr></table>
-*}
-
-</form>
-{literal}
-<script language=javascript>
-/*
-for (i = 0; i<document.spendform.type.length; i++) {
-  if ((document.spendform.type[i].value.match(/^process_/))) {
-    document.spendform.type[i].checked = true;
-    break;
-  }
-}
-*/
-updateCompound();
-</script>
-{/literal}
-
-{/if}
 {include file="footer.tpl"}

@@ -3,28 +3,22 @@
 {literal}
 <script>
 var balances = new Array();
-var pow = new Array();
 {/literal}
                                                                                                  
-var currencies = new Array({foreach from=$ec item=i name=ec}'{$i.ec}'{if !$smarty.foreach.ec.last},{/if}{/foreach});
-var curs = new Array({foreach from=$exchange item=i name=ec}'{$i.from}'{if !$smarty.section.ec.last},{/if}{/foreach});
+var currencies = new Array({section name=ec loop=$ec}'{$ec[ec].ec}'{if !$smarty.section.ec.last},{/if}{/section});
+var curs = new Array({section name=ec loop=$exchange}'{$exchange[ec].from}'{if !$smarty.section.ec.last},{/if}{/section});
 
-{foreach from=$ec item=i}
-balances[{$i.ec}] = new Number('{$i.balance}');
-{/foreach}
+{section name=ec loop=$ec}
+balances[{$ec[ec].ec}] = new Number('{$ec[ec].balance}');
+{/section}
 
 var exchange = new Array();
-var rates = new Array();
-var pow = new Array();
-{foreach from=$exchange item=e}
-exchange[{$e.from}] = new Array();
-rates[{$e.from}] = new Array();
-pow[{$e.from}] = new Number('{$e.pow}');
-{foreach from=$e.tos item=t}
-exchange[{$e.from}][{$t.to}] = new Number('{$t.percent}');
-rates[{$e.from}][{$t.to}] = new Number('{$t.rate}');
-{/foreach}
-{/foreach}
+{section name=from loop=$exchange}
+exchange[{$exchange[from].from}] = new Array();
+{section name=to loop=$exchange[from].tos}
+exchange[{$exchange[from].from}][{$exchange[from].tos[to].to}] = new Number('{$exchange[from].tos[to].percent}');
+{/section}
+{/section}
 
 {literal}
 function in_out(id, bForce)
@@ -66,8 +60,7 @@ function in_out(id, bForce)
   }
 
   var percent = Math.round(exchange[from_id][to_id] * 100) / 10000;
-//  var amount =  Math.round((1 - percent) * in_val * 100) / 100;
-  var amount = (rates[from_id][to_id] * in_val).toFixed(pow[to_id]);
+  var amount =  Math.round((1 - percent) * in_val * 100) / 100;
 
   d.elements["estimate_" + id].value = amount;
 
@@ -109,8 +102,7 @@ function out_in(id, bForce)
   }
 
   var percent = Math.round(exchange[from_id][to_id] * 100) / 10000;
-//  var amount =  Math.round(out_val / (1 - percent) * 100) / 100;
-  var amount =  (out_val / rates[from_id][to_id]).toFixed(pow[to_id]);
+  var amount =  Math.round(out_val / (1 - percent) * 100) / 100;
 
   if (amount > balances[id])
   {
@@ -180,54 +172,41 @@ function chng_bg(id, color)
 </script>
 {/literal}
 
-<h3>Exchange Center:</h3><br>
-
-{if $frm.display == "ok"}<div class="success">Exchange has been successfully completed.</div>{/if}
-
-{if $errors.no_from}<div class="error">No source currency is specified.</div>{/if}
-{if $errors.no_to}<div class="error">No destination currency is specified.</div>{/if}
-{if $errors.no_amount}<div class="error">No exchange amount is specified.</div>{/if}
-{if $errors.not_enough_funds}<div class="error">You have not enough funds to exchange from.</div>{/if}
-{if $errors.exchange_forbidden}<div class="error">The exchange for specified currencies is not allowed.</div>{/if}
-{if $errors.too_small_amount}<div class="error">The amount you have entered for exchange is too small.</div>{/if}
-
-<br>
+<h3>Exchange Center:</h3><br><br>
 
 {if $ec}
 <form method=post name="exchange_form">
 <input type="hidden" name="a" value="exchange">
 <input type="hidden" name="action" value="preview">
-<input type="hidden" name="display" value="">
-
 <table cellspacing=0 cellpadding=2 border=0>
-{foreach from=$ec item=i name=from}
+{section name=ec loop=$ec}
 <tr>
- <td><input type="radio" name="from" value="{$i.ec}" {if $smarty.foreach.from.index == 0}checked{/if} onclick="chng_selection('{$i.ec}')"></td>
- <td><img src="images/{$i.ec}.gif" align=absmiddle height=17> {$i.ec_name} :</td>
- <td><input type=text name="amount_{$i.ec}" value="{$i.balance}" class=inpts size=7
-      onchange="in_out('{$i.ec}')" onkeyup="in_out('{$i.ec}')"
-      onfocusout="in_out('{$i.ec}', true)" onactivate="in_out('{$i.ec}', true)"
-      ondeactivate="in_out('{$i.ec}', true)">
+ <td><input type="radio" name="from" value="{$ec[ec].ec}" {if $smarty.section.ec.index == 0}checked{/if} onclick="chng_selection('{$ec[ec].ec}')"></td>
+ <td><img src="images/{$ec[ec].ec}.gif" align=absmiddle height=17> {$ec[ec].ec_name} :</td>
+ <td><input type=text name="amount_{$ec[ec].ec}" value="{$ec[ec].balance}" class=inpts size=7
+      onchange="in_out('{$ec[ec].ec}')" onkeyup="in_out('{$ec[ec].ec}')"
+      onfocusout="in_out('{$ec[ec].ec}', true)" onactivate="in_out('{$ec[ec].ec}', true)"
+      ondeactivate="in_out('{$ec[ec].ec}', true)">
  </td>
  <td>to</td>
  <td>
-  <select name="to_{$i.ec}" class=inpts onchange="in_out('{$i.ec}')">
+  <select name="to_{$ec[ec].ec}" class=inpts onchange="in_out('{$ec[ec].ec}')">
    <option value=''>--SELECT--</option>
-{foreach from=$i.tos item=t name=to}
-{if $i.ec != $t.to}
-<option value={$t.to}>{$t.ec_name}</option>
+{section name=ecs loop=$ec[ec].tos}
+{if $ec[ec].ec != $ec[ec].tos[ecs].to}
+<option value={$ec[ec].tos[ecs].to}>{$ec[ec].tos[ecs].ec_name}</option>
 {/if}
-{/foreach}
+{/section}
   </select>
  </td>
- <td><input type=text name="estimate_{$i.ec}" value="0" class=inpts size=7
-      onchange="out_in('{$i.ec}')" onkeyup="out_in('{$i.ec}')"
-      onfocusout="out_in('{$i.ec}', true)" onactivate="out_in('{$i.ec}', true)"
-      ondeactivate="out_in('{$i.ec}', true)">
+ <td><input type=text name="estimate_{$ec[ec].ec}" value="0" class=inpts size=7
+      onchange="out_in('{$ec[ec].ec}')" onkeyup="out_in('{$ec[ec].ec}')"
+      onfocusout="out_in('{$ec[ec].ec}', true)" onactivate="out_in('{$ec[ec].ec}', true)"
+      ondeactivate="out_in('{$ec[ec].ec}', true)">
  </td>
- <td><input type=submit name="exchange_{$i.ec}" value="Exchange" class=sbmt></td>
+ <td><input type=submit name="exchange_{$ec[ec].ec}" value="Exchange" class=sbmt></td>
 </tr>
-{/foreach}
+{/section}
 </table>
 </form>
 {else}
@@ -239,28 +218,28 @@ Currently you have no funds to exchange.<br><br>
 <table cellspacing=1 cellpadding=2 border=0>
 <tr>
  <td align=center class=calendartablebg>From / To</td>
-{foreach from=$exchange item=f}
- <td align=center class=calendartablebg><img src="images/{$f.from}.gif" height=17></td>
-{/foreach}
+{section name=from loop=$exchange}
+ <td align=center class=calendartablebg><img src="images/{$exchange[from].from}.gif" height=17></td>
+{/section}
 </tr>
-{foreach from=$exchange item=f}
+{section name=from loop=$exchange}
 <tr>
- <td align=center class=calendartablebg id="e{$f.from}_t"><img src="images/{$f.from}.gif" height=17></td>
- {foreach from=$f.tos item=t}
-  <td align=center class=calendartablebg id="e{$f.from}_{$t.to}">
-   {if $f.from == $t.to}
+ <td align=center class=calendartablebg id="e{$exchange[from].from}_t"><img src="images/{$exchange[from].from}.gif" height=17></td>
+ {section name=to loop=$exchange[from].tos}
+  <td align=center class=calendartablebg id="e{$exchange[from].from}_{$exchange[from].tos[to].to}">
+   {if $exchange[from].from == $exchange[from].tos[to].to}
      -
    {else}
-    {if $t.percent == 100}
+    {if $exchange[from].tos[to].percent == 100}
      -
     {else}
-     {$t.percent}%
+     {$exchange[from].tos[to].percent}%
     {/if}
    {/if}
   </td>
- {/foreach}
+ {/section}
 </tr>
-{/foreach}
+{/section}
 </table>
 </td></tr></table>
 

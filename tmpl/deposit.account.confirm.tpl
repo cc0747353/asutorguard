@@ -1,15 +1,6 @@
 {include file="header.tpl"}
 
-{if $errors}
-{if $errors.invalid_type} The Plan does not exist. {/if} 
-{if $errors.not_enough_funds} You have no enough funds to complete the operation.<br>{/if}
-{if $errors.less_min}The minimal spend amount for '{$plan_name}' is {$currency_sign}{$errors.less_min}.<br>{/if}
-{if $errors.on_hold}Sorry, this amount on hold now.<br>{/if}
-<br>
-Click <a href="{"?a=deposit"|encurl}">here</a> and try again.
-
-{else}
-
+{if $ok == 1}
 <h3>Deposit Confirmation:</h3><br><br>
 
 <table cellspacing=0 cellpadding=2 class="form deposit_confirm">
@@ -42,25 +33,10 @@ Click <a href="{"?a=deposit"|encurl}">here</a> and try again.
  <td>{$deposit.compound|number_format}%</td>
 </tr>
 {/if}
-{if $deposit.fees.fee}
-<tr>
- <th>Credit Amount:</th>
- <td>{$deposit.user_amount|fiat:$deposit.ec}</td>
-</tr>
-<tr>
- <th>Deposit Fee:</th>
- <td>{$deposit.fees.fee|fiat:$deposit.ec} ({$deposit.fees.percent}%)</td>
-</tr>
-<tr>
- <th>Deposit:</th>
- <td>{$deposit.to_deposit|fiat:$deposit.ec}</td>
-</tr>
-{else}
 <tr>
  <th>Amount:</th>
- <td>{$deposit.user_amount|fiat:$deposit.ec}</td>
+ <td>{$currency_sign}{$deposit.amount}</td>
 </tr>
-{/if}
 </table>
 
 <form name=spend method=post>
@@ -75,6 +51,14 @@ Click <a href="{"?a=deposit"|encurl}">here</a> and try again.
 <input type=button class=sbmt value="Cancel" onclick="document.location='?a=deposit'">
 </form>
 
+{else}
+{if $max_deposit_less == 1}Sorry, the maximal deposit is {$max_deposit_format}.<br>{/if}
+{if $wrong_plan == 1} The Plan does not exist. {/if} 
+{if $not_enough_funds == 1} You have not enough funds to complete the operation.<br>{/if}
+{if $less_than_min == 1}The minimal spend amount for '{$plan_name}' is {$currency_sign}{$min_amount}.<br>{/if}
+{if $on_hold == 1}Sorry, this amount on hold now.<br>{/if}
+<br>
+Click <a href="{"?a=deposit"|encurl}">here</a> and try again.
 {/if}
 
 {include file="footer.tpl"}

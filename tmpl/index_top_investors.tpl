@@ -12,7 +12,7 @@
 {foreach from=$top_investors item=s}
 <tr>
  <td class=menutxt>{$s.username}</td>
- <td class=menutxt>{$s.amount|fiat}</td>
+ <td class=menutxt>{$currency_sign}{$s.amount}</td>
 </tr>
 {/foreach}
 </table>
