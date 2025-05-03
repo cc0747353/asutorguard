@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-xl-5 col-lg-6 offset-lg-6 offset-xl-7">
                 <div class="banner-content">
-                    <h1 class="title">Sysco  <span>Global  </span> Finance</h1>
+                    <h1 class="title">Asutor  <span>Guard  </span> Investment</h1>
                     <p>
                         A Leader in Private Equity Financing and Consulting.
                     </p>

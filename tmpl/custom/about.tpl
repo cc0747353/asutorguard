@@ -130,6 +130,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="col-lg-4 col-xl-3">
                 <div class="ceo-thumb">
                     <img
@@ -142,6 +143,7 @@
                     class="custom-button"
                 >Open Certificate</a>
             </div>
+            -->
         </div>
     </div>
 </section>

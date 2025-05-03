@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Syscoglobalfinance</title>
+    <title>Asutor Guard</title>
 
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/all.min.css">
@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 
     {literal}
-        <!-- Smartsupp Live Chat script -->
+        <!-- Smartsupp Live Chat script 
         <script type="text/javascript">
             var _smartsupp = _smartsupp || {};
             _smartsupp.key = '3fcf20eb8c1dbbc4a5655a2c28e412d2f5a7109c';
@@ -38,7 +38,7 @@
                 s.parentNode.insertBefore(c, s);
             })(document);
         </script>
-
+      -->
     {/literal}
 
     
